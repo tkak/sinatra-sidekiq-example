@@ -1,0 +1,14 @@
+web:
+  build: .
+  command: foreman start
+  ports:
+    - "5000:5000"
+  volumes:
+    - .:/opt/sinatra-sidekiq-api
+  links:
+    - redis
+  environment:
+    - REDIS_HOST=redis
+    - REDIS_PORT=6379
+redis:
+  image: redis
