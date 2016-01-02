@@ -3,6 +3,7 @@ GEM
   specs:
     concurrent-ruby (1.0.0)
     connection_pool (2.2.0)
+    diff-lcs (1.2.5)
     foreman (0.78.0)
       thor (~> 0.19.1)
     json (1.8.3)
@@ -10,6 +11,19 @@ GEM
     rack-protection (1.5.3)
       rack
     redis (3.2.2)
+    rspec (3.4.0)
+      rspec-core (~> 3.4.0)
+      rspec-expectations (~> 3.4.0)
+      rspec-mocks (~> 3.4.0)
+    rspec-core (3.4.1)
+      rspec-support (~> 3.4.0)
+    rspec-expectations (3.4.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-mocks (3.4.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-support (3.4.1)
     sidekiq (4.0.1)
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
@@ -27,6 +41,7 @@ PLATFORMS
 
 DEPENDENCIES
   foreman
+  rspec
   sidekiq
   sinatra
 

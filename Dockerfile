@@ -6,6 +6,6 @@ ADD Gemfile Gemfile
 ADD Gemfile.lock Gemfile.lock
 RUN bundle install
 
-WORKDIR /opt/sinatra-sidekiq-api
+WORKDIR /opt/sinatra-sidekiq-example
 
 EXPOSE 5000

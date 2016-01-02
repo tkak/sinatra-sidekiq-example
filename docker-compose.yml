@@ -4,7 +4,7 @@ web:
   ports:
     - "5000:5000"
   volumes:
-    - .:/opt/sinatra-sidekiq-api
+    - .:/opt/sinatra-sidekiq-example
   links:
     - redis
   environment:

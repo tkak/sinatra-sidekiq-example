@@ -1,3 +1,3 @@
 require './app'
 
-run Rack::URLMap.new('/' => Sinatra::Application, '/sidekiq' => Sidekiq::Web)
+run Rack::URLMap.new('/' => SomeApp, '/sidekiq' => Sidekiq::Web)
