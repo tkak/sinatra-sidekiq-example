@@ -1,5 +1,5 @@
 require 'sidekiq'
-require 'sinatra'
+require 'sinatra/base'
 require 'sidekiq/web'
 
 Sidekiq.configure_server do |config|
@@ -21,15 +21,17 @@ class SomeWorker
   end
 end
 
-get '/things' do
-  things = $redis.hvals('things')
-  things.to_json
-end
-
-post '/things' do
-  content_type :json
-  req = JSON.load(request.body.read.to_s)
-  $redis.hset('things', req['id'], req['thing'])
-  SomeWorker.perform_async(req['id'])
-  "enqueue #{req['id']}, #{req['thing']}"
+class SomeApp < Sinatra::Application
+  get '/things' do
+    things = $redis.hvals('things')
+    things.to_json
+  end
+  
+  post '/things' do
+    content_type :json
+    req = JSON.load(request.body.read.to_s)
+    $redis.hset('things', req['id'], req['thing'])
+    SomeWorker.perform_async(req['id'])
+    "enqueue #{req['id']}, #{req['thing']}"
+  end
 end
