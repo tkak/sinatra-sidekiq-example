@@ -24,6 +24,7 @@ class SomeApp < Sinatra::Application
   get '/things' do
     things = $redis.hvals('things')
     things.to_json
+    status 200
   end
   
   post '/things' do
@@ -32,5 +33,6 @@ class SomeApp < Sinatra::Application
     $redis.hset('things', req['id'], req['thing'])
     SomeWorker.perform_async(req['id'])
     "enqueue #{req['id']}, #{req['thing']}"
+    status 202
   end
 end
