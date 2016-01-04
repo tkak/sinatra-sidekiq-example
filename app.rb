@@ -1,24 +1,12 @@
 require 'sidekiq'
 require 'sinatra/base'
-
-Sidekiq.configure_server do |config|
-  config.redis = { url: "redis://#{ENV['REDIS_HOST']}:#{ENV['REDIS_PORT']}" }
-end
+require 'workers/some'
 
 Sidekiq.configure_client do |config|
   config.redis = { url: "redis://#{ENV['REDIS_HOST']}:#{ENV['REDIS_PORT']}" }
 end
 
 $redis = Redis.new( url: "redis://#{ENV['REDIS_HOST']}:#{ENV['REDIS_PORT']}" )
-
-class SomeWorker
-  include Sidekiq::Worker
-  def perform(id)
-    thing = $redis.hget('things', id)
-    sleep 10
-    p "The work is done: #{thing}"
-  end
-end
 
 class SomeApp < Sinatra::Application
   get '/things' do
