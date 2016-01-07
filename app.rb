@@ -1,6 +1,6 @@
 require 'sidekiq'
 require 'sinatra/base'
-require 'some_worker'
+require_relative 'lib/some_worker'
 
 Sidekiq.configure_client do |config|
   config.redis = { url: "redis://#{ENV['REDIS_HOST']}:#{ENV['REDIS_PORT']}" }
@@ -11,8 +11,8 @@ $redis = Redis.new( url: "redis://#{ENV['REDIS_HOST']}:#{ENV['REDIS_PORT']}" )
 class App < Sinatra::Application
   get '/things' do
     things = $redis.hvals('things')
-    things.to_json
     status 200
+    things.to_json
   end
   
   post '/things' do
