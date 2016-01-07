@@ -9,6 +9,8 @@
 /test/tmp/
 /test/version_tmp/
 /tmp/
+log/unicorn.stderr.log
+log/unicorn.stdout.log
 
 ## Specific to RubyMotion:
 .dat*
